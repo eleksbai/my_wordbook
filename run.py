@@ -6,6 +6,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 from generate_txt import generate_txt
 from wordbook.spiders.linux_man import LinuxManSpider
+from wordbook.spiders.python_lib import PythonLibSpider
 
 # 最大运行时间，12小时
 MAX_RUN_TIME = 60*60*12
@@ -13,8 +14,8 @@ MAX_RUN_TIME = 60*60*12
 class Manager:
     def __init__(self):
         self.crawler = CrawlerProcess(get_project_settings())
-        self.crawler.crawl(LinuxManSpider)
-        self.cache_file = 'linux_man.cache'
+        self.crawler.crawl(PythonLibSpider)
+        self.cache_file = 'python_lib.cache'
         self.txt = generate_txt
 
 
@@ -37,7 +38,7 @@ class Manager:
             self.txt.queue.put(None)
             txt_thr.join()
             self.txt.data_to_cache(self.cache_file)
-        self.txt.to_txt("linux_man")
+        self.txt.to_txt("python_lib")
 
 
 if __name__ =='__main__':

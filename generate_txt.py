@@ -13,7 +13,7 @@ class GenerateTXT:
         self.queue = Queue()
         self.loop_flag = True
         self.en_US_Dict = enchant.Dict("en_US")
-        self.max_count = 3000
+
         print(self.data)
 
 
@@ -59,19 +59,20 @@ class GenerateTXT:
                 count, word = line.split()
                 self.data[word] = int(count)
 
-    def to_txt(self, label, min_count=None, max_count=3000):
-        if min_count is None:
-            min_count = self.get_mode_number()
+    def to_txt(self, label, min_count=100, max_count=3000):
+        # if min_count is None:
+            # min_count = self.get_mode_number()
+
         data = []
         l_data = sorted([(v, k) for k, v in self.data.items()], reverse=True)
-        for count, word in l_data[:self.max_count]:
+        for count, word in l_data[:max_count]:
             print("{} {}".format(count, word))
             if count >= min_count:
                 data.append(word)
         print("total:", sum(self.data.values()))
-        print("release:", sum([i[0] for i in l_data[:self.max_count]]))
+        print("release:", sum([i[0] for i in l_data[:max_count]]))
         print("mode:", min_count)
-        with open("releases/{}_{}.txt".format(label, min_count), 'w') as f:
+        with open("releases/{}_{}.txt".format(label, max_count), 'w') as f:
             for i in data:
                 f.write(str(i) + '\r\n')
 

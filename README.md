@@ -17,6 +17,8 @@ scrapy startproject wordbook
 
 cd wordbook
 scrapy genspider -t crawl linux_man man7.org
+scrapy genspider -t crawl python_lib python.org
+
 ```
 
 # 使用方法
