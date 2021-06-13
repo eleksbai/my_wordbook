@@ -33,7 +33,7 @@ class GenerateTXT:
 
 
     def spider_item(self, words):
-        # print(f'spider_item q[{self.queue.qsize()}]: {time.strftime("%X")} {len(words)}')
+        print(f'spider_item q[{self.queue.qsize()}]: {time.strftime("%X")} {len(words)}')
         self.queue.put(words)
 
 
