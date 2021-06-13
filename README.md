@@ -12,9 +12,12 @@
 # scapy 
 [scrapy教程](https://docs.scrapy.org/en/latest/intro/tutorial.html)
 ```shell
+# 如果项目已经创建，可能需要调整下项目路径， 主要是scapy.cfg的路径
 scrapy startproject wordbook
+
 cd wordbook
 scrapy genspider -t crawl linux_man man7.org
 ```
 
+# 使用方法
 

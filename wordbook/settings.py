@@ -1,3 +1,4 @@
+# 路径相关参考， https://stackoverflow.com/questions/53080035/scrapy-how-can-i-load-the-project-level-settings-py-while-using-a-script-to-st
 # Scrapy settings for wordbook project
 #
 # For simplicity, this file contains only settings considered important or
@@ -86,3 +87,5 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+LOG_LEVEL = 'INFO'
