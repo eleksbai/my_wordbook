@@ -67,7 +67,7 @@ class GenerateTXT:
         l_data = sorted([(v, k) for k, v in self.data.items()], reverse=True)
         for count, word in l_data[:max_count]:
             print("{} {}".format(count, word))
-            if count >= min_count:
+            if count >= min_count or len(data) < max_count/2:
                 data.append(word)
         print("total:", sum(self.data.values()))
         print("release:", sum([i[0] for i in l_data[:max_count]]))
