@@ -1,5 +1,7 @@
 # txt.cache
+cache/
 *.cache
+
 # pycharm
 .idea
 # Byte-compiled / optimized / DLL files

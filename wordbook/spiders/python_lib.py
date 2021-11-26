@@ -24,4 +24,4 @@ class PythonLibSpider(CrawlSpider):
         #item['domain_id'] = response.xpath('//input[@id="sid"]/@value').get()
         #item['name'] = response.xpath('//div[@id="name"]').get()
         #item['description'] = response.xpath('//div[@id="description"]').get()
-        generate_txt.spider_item(words)
+        generate_txt.add_words(words)

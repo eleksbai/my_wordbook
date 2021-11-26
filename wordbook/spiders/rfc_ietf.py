@@ -29,4 +29,4 @@ class RfcIetfSpider(CrawlSpider):
         text = re.sub(r'[\s,.!?<>:()]+', ' ', response.text)
         words.extend(text.split())
 
-        generate_txt.spider_item(words)
+        generate_txt.add_words(words)

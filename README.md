@@ -23,3 +23,8 @@ scrapy genspider -t crawl python_lib python.org
 
 # 使用方法
 
+# 抓取目标
+## suricata 文档
+https://suricata.readthedocs.io/en/latest/
+网页下载成本地文件， 用python去解析html文件，提取单词。
+python read_html --label suricata suricata-readthedocs-io-en-suricata-6.0.4/suricata-suricata-6.0.4/index.html

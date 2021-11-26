@@ -26,4 +26,4 @@ class LinuxManSpider(CrawlSpider):
         #     with open('/home/hyman/case/my_wordbook/dist/{}.txt'.format(response.url.split('/')[-1]), 'w') as f:
         #         f.write(response.text)
         #     print("url:", response.url, len(l_data), *l_data[:10])
-        generate_txt.spider_item(words)
+        generate_txt.add_words(words)

@@ -1,4 +1,6 @@
+import os
 import re
+import threading
 import time
 from array import array
 from queue import Queue
@@ -13,8 +15,17 @@ class GenerateTXT:
         self.queue = Queue()
         self.loop_flag = True
         self.en_US_Dict = enchant.Dict("en_US")
+        self.cache_file = None
 
-        print(self.data)
+        print("init generate txt ...")
+
+    def set_cache_file(self, cache_file):
+        if not os.path.exists('cache'):
+            os.mkdir('cache')
+        cache_file = 'cache/' + cache_file
+        print("使用缓存", cache_file)
+        self.cache_file = cache_file
+        pass
 
 
 
@@ -32,19 +43,20 @@ class GenerateTXT:
                 self.data[i] += 1
 
 
-    def spider_item(self, words):
+    def add_words(self, words):
         print(f'spider_item q[{self.queue.qsize()}]: {time.strftime("%X")} {len(words)}')
         self.queue.put(words)
 
 
     def word_check(self, words):
-        err_words = set()
+        err_words = {'', None}
         # return words
         for i in set(words):
-            if not self.en_US_Dict.check(i):
-                err_words.add(i)
-            if not re.match('[A-Za-z][A-Za-z]+',i):
-                err_words.add(i)
+            if i:
+                if not self.en_US_Dict.check(i):
+                    err_words.add(i)
+                if not re.match('[A-Za-z][A-Za-z]+',i):
+                    err_words.add(i)
         return [i for i in words if i not in err_words]
 
     def data_to_cache(self, name):
@@ -83,5 +95,17 @@ class GenerateTXT:
         set_number.remove(0)
         return max(set_number, key=data.count) * 100
 
+    def start(self, label):
+        use_cache = os.path.exists(self.cache_file)
+        # use_cache=False
+        if use_cache :
+            self.cache_to_data(self.cache_file)
+        else:
+            txt_thr = threading.Thread(target=self.loop)
+            txt_thr.start()
+            self.queue.put(None)
+            txt_thr.join()
+            self.data_to_cache(self.cache_file)
+        self.to_txt(label)
 
 generate_txt = GenerateTXT()
